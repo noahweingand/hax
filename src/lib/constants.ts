@@ -6,56 +6,56 @@ import {
 
 dotenv.config();
 
-export const SteamIds = {
-  austin: {
+export const HaxPlayers = [
+  {
+    name: 'Austin',
     steamId: 106034326,
     userId: '223928126739054603',
   },
-  ben: {
+  {
+    name: 'Ben',
     steamId: 116349078,
     userId: '218881550320664577',
   },
-  brent: {
+  {
+    name: 'Brent',
     steamId: 81968524,
     userId: '163530712828346369',
   },
-  malik: {
+  {
+    name: 'Malik',
     steamId: 386227878,
     userId: '229106142901436422',
   },
-  pat: {
+  {
+    name: 'Pat',
     steamId: 96833866,
     userId: '77579956095287296',
   },
-  tyler: {
+  {
+    name: 'Tyler',
     steamId: 95999142,
     userId: '133007518652825611',
   },
-  zach: {
+  {
+    name: 'Zach',
     steamId: 60173042,
     userId: '149587542600056832',
   },
-};
+  {
+    name: 'Noah',
+    steamId: 83813536,
+    userId: '230876090690699264',
+  },
+];
 
 export const commands = [
   new SlashCommandBuilder()
     .setName('stats')
-    .setDescription(`Get global stats for a HAX player`)
-    .addStringOption((option: SlashCommandStringOption) =>
-      option
-        .setName('name')
-        .setDescription(`HAX member's name`)
-        .setRequired(true),
-    ),
+    .setDescription(`Get global stats for a HAX player`),
   new SlashCommandBuilder()
     .setName('hero-perf')
     .setDescription(`Grabs hero specific performance by a HAX player`)
-    .addStringOption((option: SlashCommandStringOption) =>
-      option
-        .setName('name')
-        .setDescription(`HAX member's name`)
-        .setRequired(true),
-    )
     .addStringOption((option: SlashCommandStringOption) =>
       option
         .setName('hero')
@@ -64,22 +64,10 @@ export const commands = [
     ),
   new SlashCommandBuilder()
     .setName('last-match')
-    .setDescription(`Retrieves last match detail`)
-    .addStringOption((option: SlashCommandStringOption) =>
-      option
-        .setName('name')
-        .setDescription(`HAX member's name`)
-        .setRequired(true),
-    ),
+    .setDescription(`Retrieves last match detail`),
   new SlashCommandBuilder()
     .setName('played-with')
-    .setDescription(`Returns matches played with either pros or casters`)
-    .addStringOption((option: SlashCommandStringOption) =>
-      option
-        .setName('name')
-        .setDescription(`HAX member's name`)
-        .setRequired(true),
-    ),
+    .setDescription(`Returns matches played with either pros or casters`),
 ].map((command) => command.toJSON());
 
 declare global {
