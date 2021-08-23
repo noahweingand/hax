@@ -6,7 +6,9 @@ const convertEpochDateTime = (epochDateTime: number) => {
   return date.toString();
 };
 
-export const getEmbed = async (stats: DotaPlayer): Promise<MessageEmbed> => {
+export const getStatsEmbed = async (
+  stats: DotaPlayer,
+): Promise<MessageEmbed> => {
   const {
     name,
     soloRank,
@@ -19,9 +21,8 @@ export const getEmbed = async (stats: DotaPlayer): Promise<MessageEmbed> => {
 
   return new MessageEmbed()
     .setColor('#0099ff')
-    .setTitle(`Dota 2 Stats`)
+    .setTitle(`${name}'s stats`)
     .setAuthor('Hax Cuck Bot')
-    .setDescription(`${name}'s stats`)
     .addFields(
       {
         name: 'Solo Rank',

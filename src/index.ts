@@ -1,8 +1,9 @@
 import { Client, Intents, Interaction } from 'discord.js';
-import { DISCORD_BOT_TOKEN, HaxPlayers } from './lib/constants';
+import { DISCORD_BOT_TOKEN } from './lib/constants';
 import { randomUUID } from 'crypto';
+import { getPlayer } from './lib/helpers';
 import { getPlayerStats } from './lib/services/dota-api';
-import { getEmbed } from './lib/embed';
+import { getStatsEmbed } from './lib/embeds';
 
 const intents = new Intents([
   Intents.FLAGS.GUILDS,
@@ -23,17 +24,24 @@ client.on('interactionCreate', async (interaction: Interaction) => {
 
   if (!interaction.isCommand()) return;
 
-  const { user, commandName } = interaction; //options
+  const { user, commandName, options } = interaction;
+  const allOptions = options?.data;
 
-  const haxPlayer = HaxPlayers.find((player) => player.userId === user?.id);
-
-  //const hero = options?.data[0]?.value;
+  const nameInput = allOptions[0]?.value?.toString();
+  const player = getPlayer(user, nameInput);
 
   if (commandName === 'stats') {
-    if (haxPlayer !== undefined) {
-      const stats = await getPlayerStats(haxPlayer.steamId.toString());
-      const embed = await getEmbed(stats);
+    if (player !== undefined) {
+      const stats = await getPlayerStats(player);
+
+      const embed = await getStatsEmbed(stats);
+
       await interaction.reply({ embeds: [embed] });
+    }
+  }
+
+  if (commandName === 'played-with') {
+    if (player !== undefined) {
     }
   }
 });
