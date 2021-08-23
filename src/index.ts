@@ -1,19 +1,35 @@
-import dotenv from 'dotenv';
-import Discord, { Client, Intents, Message } from 'discord.js';
-if (process.env.ENV === 'dev') {
-  dotenv.config();
-}
+import { Client, Intents, Interaction } from 'discord.js';
+import { DISCORD_BOT_TOKEN } from './lib/constants';
+import { randomUUID } from 'crypto';
 
-const DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_API_KEY;
-
-const intents = new Intents(Intents.FLAGS.GUILD_MESSAGES);
+const intents = new Intents([
+  Intents.FLAGS.GUILDS,
+  Intents.FLAGS.GUILD_MESSAGES,
+]);
 
 const client = new Client({
   intents: [intents],
-  partials: ['CHANNEL', 'MESSAGE', 'REACTION'],
   restRequestTimeout: 60000,
 });
 
-client.on('message', (msg: Message) => {});
+client.on('ready', () => {
+  console.log('Hax Cuck Shame Bot is ready!');
+});
+
+client.on('interactionCreate', async (interaction: Interaction) => {
+  console.log(`Interaction ID - ${randomUUID()}`);
+
+  if (!interaction.isCommand()) return;
+
+  const { commandName } = interaction;
+
+  if (commandName === 'stats') {
+    try {
+      await interaction.reply('wassup widdit');
+    } catch (e) {
+      console.log(e);
+    }
+  }
+});
 
 client.login(DISCORD_BOT_TOKEN);
