@@ -1,8 +1,4 @@
 import * as dotenv from 'dotenv';
-import {
-  SlashCommandBuilder,
-  SlashCommandStringOption,
-} from '@discordjs/builders';
 
 dotenv.config();
 
@@ -48,87 +44,6 @@ export const HaxPlayers = [
     userId: '230876090690699264',
   },
 ];
-
-export const commands = [
-  new SlashCommandBuilder()
-    .setName('stats')
-    .setDescription(`Get global stats for a HAX player`)
-    .addStringOption((option: SlashCommandStringOption) =>
-      option
-        .setName('name')
-        .setDescription(`Name of the user you want stats for`)
-        .addChoices([
-          ['Austin', 'Austin'],
-          ['Ben', 'Ben'],
-          ['Brent', 'Brent'],
-          ['Malik', 'Malik'],
-          ['Pat', 'Pat'],
-          ['Tyler', 'Tyler'],
-          ['Zach', 'Zach'],
-        ])
-        .setRequired(false),
-    ),
-  new SlashCommandBuilder()
-    .setName('hero-perf')
-    .setDescription(`Grabs hero specific performance by a HAX player`)
-    .addStringOption((option: SlashCommandStringOption) =>
-      option
-        .setName('hero')
-        .setDescription(`Dota hero's name`)
-        .setRequired(true),
-    )
-    .addStringOption((option: SlashCommandStringOption) =>
-      option
-        .setName('name')
-        .setDescription(`Name of the user you want stats for`)
-        .addChoices([
-          ['Austin', 'austin'],
-          ['Ben', 'ben'],
-          ['Brent', 'brent'],
-          ['Malik', 'malik'],
-          ['Pat', 'pat'],
-          ['Tyler', 'tyler'],
-          ['Zach', 'zach'],
-        ])
-        .setRequired(false),
-    ),
-  new SlashCommandBuilder()
-    .setName('last-match')
-    .setDescription(`Retrieves last match detail`)
-    .addStringOption((option: SlashCommandStringOption) =>
-      option
-        .setName('name')
-        .setDescription(`Name of the user you want stats for`)
-        .addChoices([
-          ['Austin', 'austin'],
-          ['Ben', 'ben'],
-          ['Brent', 'brent'],
-          ['Malik', 'malik'],
-          ['Pat', 'pat'],
-          ['Tyler', 'tyler'],
-          ['Zach', 'zach'],
-        ])
-        .setRequired(false),
-    ),
-  new SlashCommandBuilder()
-    .setName('played-with')
-    .setDescription(`Returns matches played with either pros or casters`)
-    .addStringOption((option: SlashCommandStringOption) =>
-      option
-        .setName('name')
-        .setDescription(`Name of the user you want stats for`)
-        .addChoices([
-          ['Austin', 'austin'],
-          ['Ben', 'ben'],
-          ['Brent', 'brent'],
-          ['Malik', 'malik'],
-          ['Pat', 'pat'],
-          ['Tyler', 'tyler'],
-          ['Zach', 'zach'],
-        ])
-        .setRequired(false),
-    ),
-].map((command) => command.toJSON());
 
 declare global {
   namespace NodeJS {
