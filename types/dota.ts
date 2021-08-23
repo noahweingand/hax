@@ -1,16 +1,21 @@
 export interface DotaPlayer {
-  behaviorScore: number;
+  behaviorScore: number; // asdfasdfasdfasdf
   firstMatchDate: number; //?
-  matchCount: number;
-  name: string;
-  partyRank: number; //?
+  matchCount: number; // asdfasdfasdfasdf
   ranks: Rank[];
-  seasonRank: number;
-  smurfCheckDate: number; //?
-  smurfFlag: number;
-  soloRank: number; //?
-  winCount: number;
+  steamAccount: SteamAccount;
+  winCount: number; // asdfasdfasdfasdf
 }
+
+type SteamAccount = {
+  lastMatchDateTime: number;
+  name: string; // asdfasdfasdfasdf
+  partyRank: number; //? // asdfasdfasdfasdf
+  seasonRank: number; // asdfasdfasdfasdf
+  soloRank: number; //? // asdfasdfasdfasdf
+  smurfCheckDate: number; //? // asdfasdfasdfasdf
+  smurfFlag: number; // asdfasdfasdfasdf
+};
 
 type Rank = {
   asOfDateTime: string;
