@@ -1,9 +1,10 @@
 import { MessageEmbed } from 'discord.js';
-import { DotaPlayer } from '../../types/dota';
+import { DotaPlayer, Pro } from '../../types/dota';
+import { ProPlayers } from './constants';
 
 const convertEpochDateTime = (epochDateTime: number) => {
   const date = new Date(epochDateTime * 1000);
-  return date.toString();
+  return date.toLocaleString();
 };
 
 export const getStatsEmbed = async (
@@ -72,4 +73,55 @@ export const getStatsEmbed = async (
     )
     .setTimestamp()
     .setFooter('Github', 'https://github.com/noahweingand/hax');
+};
+
+export const replyPlayedWithProMsg = async (
+  casterMatches: Pro[],
+  teamMatches: Pro[],
+  playerName: string,
+) => {
+  let msg = `------------Played with pros data------------\n`;
+
+  if (casterMatches.length !== 0) {
+    for (const match of casterMatches) {
+      const winOrVs = match?.vs ? match?.vs : match?.with;
+
+      const { date, isVictory } = winOrVs;
+
+      msg =
+        msg +
+        `${playerName} played ${match?.with ? 'with' : 'against'} ${
+          parseInt(match?.steamId, 10) === ProPlayers.Blitz.steamId
+            ? ProPlayers.Blitz.name
+            : ProPlayers.PyrionFlax.name
+        } on ${convertEpochDateTime(date)} and ${
+          isVictory ? 'WON' : 'LOST'
+        }.\n`;
+    }
+  } else {
+    msg = msg + `You have not played with any casters.\n`;
+  }
+
+  if (teamMatches.length !== 0) {
+    for (const match of casterMatches) {
+      const winOrVs = match?.vs ? match?.vs : match?.with;
+
+      const { date, isVictory } = winOrVs;
+
+      msg =
+        msg +
+        `${playerName} played ${match?.with ? 'with' : 'against'} ${
+          parseInt(match?.steamId, 10) === ProPlayers.Blitz.steamId
+            ? ProPlayers.Blitz.name
+            : ProPlayers.PyrionFlax.name
+        } on ${convertEpochDateTime(date)} and ${
+          isVictory ? 'WON' : 'LOST'
+        }.\n`;
+    }
+  } else {
+    msg =
+      msg + `You have not played with any international winners or teams.\n`;
+  }
+
+  return msg;
 };
