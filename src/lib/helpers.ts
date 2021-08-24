@@ -1,6 +1,6 @@
 import { User } from 'discord.js';
 import { HaxPlayers } from './constants';
-import { Pros, Pro } from '../../types/dota';
+import { ProsStratz, Pro } from '../../types/dota';
 
 export const getPlayer = (user: User, nameInput: string | undefined) => {
   return nameInput !== undefined
@@ -8,7 +8,7 @@ export const getPlayer = (user: User, nameInput: string | undefined) => {
     : HaxPlayers.find((player) => player.userId === user?.id);
 };
 
-export const getPlayedWithProMatches = (pros: Pros) => {
+export const getPlayedWithProMatches = (pros: ProsStratz) => {
   const casterMatches = pros.casters.filter(
     (caster) => caster.with !== undefined || caster.vs !== undefined,
   );

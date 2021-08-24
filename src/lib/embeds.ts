@@ -1,5 +1,11 @@
 import { MessageEmbed } from 'discord.js';
-import { DotaPlayer, Pro } from '../../types/dota';
+import {
+  DotaPlayerStratz,
+  DotaPlayerOpen,
+  DotaPlayerWinLoss,
+  Pro,
+  ProsOpen,
+} from '../../types/dota';
 import { ProPlayers } from './constants';
 
 const convertEpochDateTime = (epochDateTime: number) => {
@@ -8,17 +14,14 @@ const convertEpochDateTime = (epochDateTime: number) => {
 };
 
 export const getStatsEmbed = async (
-  stats: DotaPlayer,
+  info: DotaPlayerStratz,
+  stats: DotaPlayerOpen,
+  wL: DotaPlayerWinLoss,
 ): Promise<MessageEmbed> => {
-  const {
-    name,
-    soloRank,
-    partyRank,
-    seasonRank,
-    smurfFlag,
-    smurfCheckDate,
-    lastMatchDateTime,
-  } = stats?.steamAccount;
+  const { name, partyRank, smurfFlag, smurfCheckDate, lastMatchDateTime } =
+    info?.steamAccount;
+  const { solo_competitive_rank, competitive_rank, mmr_estimate, rank_tier } =
+    stats;
 
   return new MessageEmbed()
     .setColor('#0099ff')
@@ -27,26 +30,44 @@ export const getStatsEmbed = async (
     .addFields(
       {
         name: 'Solo Rank',
-        value: `${soloRank}`,
+        value: `${
+          solo_competitive_rank === null ? 'N/A' : solo_competitive_rank
+        }`,
         inline: true,
       },
       {
         name: 'Party Rank',
-        value: `${partyRank}`,
+        value: `${partyRank === undefined ? 'N/A' : partyRank}`,
         inline: true,
       },
       {
         name: 'Season Rank',
-        value: `${seasonRank}`,
+        value: `${rank_tier === null ? 'N/A' : rank_tier}`,
         inline: true,
       },
       { name: '\u200B', value: '\u200B' },
-      { name: 'Win Count', value: `${stats?.winCount}`, inline: true },
-      { name: 'Match Total', value: `${stats?.matchCount}`, inline: true },
+      {
+        name: 'Competitve Rank',
+        value: `${competitive_rank === null ? 'N/A' : competitive_rank}`,
+        inline: true,
+      },
+      {
+        name: 'MMR Estimate',
+        value: `${
+          mmr_estimate.estimate === undefined ? 'N/A' : mmr_estimate.estimate
+        }`,
+        inline: true,
+      },
+      { name: '\u200B', value: '\u200B' },
+      { name: 'Win Count', value: `${wL?.win}`, inline: true },
+      { name: 'Loss Count', value: `${wL?.lose}`, inline: true },
+      { name: 'Match Total', value: `${wL?.win + wL?.lose}`, inline: true },
       { name: '\u200B', value: '\u200B' },
       {
         name: 'Behavior Score',
-        value: `${stats?.behaviorScore}`,
+        value: `${
+          info?.behaviorScore === undefined ? 'N/A' : info?.behaviorScore
+        }`,
         inline: true,
       },
       {
@@ -62,7 +83,7 @@ export const getStatsEmbed = async (
       { name: '\u200B', value: '\u200B' },
       {
         name: 'First Match Date',
-        value: `${convertEpochDateTime(stats?.firstMatchDate)}`,
+        value: `${convertEpochDateTime(info?.firstMatchDate)}`,
         inline: true,
       },
       {
@@ -75,12 +96,12 @@ export const getStatsEmbed = async (
     .setFooter('Github', 'https://github.com/noahweingand/hax');
 };
 
-export const replyPlayedWithProMsg = async (
+export const replyProStratzMsg = async (
   casterMatches: Pro[],
   teamMatches: Pro[],
   playerName: string,
 ) => {
-  let msg = `------------Played with pros data------------\n`;
+  let msg = `------------Played With Pros Stratz data------------\n`;
 
   if (casterMatches.length !== 0) {
     for (const match of casterMatches) {
@@ -122,6 +143,39 @@ export const replyPlayedWithProMsg = async (
     msg =
       msg + `You have not played with any international winners or teams.\n`;
   }
+
+  return msg;
+};
+
+export const getProEmbed = (msg: string, playerName: string) => {
+  return new MessageEmbed()
+    .setColor('#0099ff')
+    .setTitle(`${playerName}'s OpenDota Matches w/ Pros Stats`)
+    .setAuthor('Hax Cuck Bot')
+    .setDescription(msg);
+};
+
+export const replyProOpenMsg = (playerName: string, pros: ProsOpen[]) => {
+  let msg = ``;
+
+  pros.forEach((pro) => {
+    const withFlag = pro.with_games !== 0 ? true : false;
+    const againstFlag = pro.against_games !== 0 ? true : false;
+    if (withFlag === true) {
+      msg =
+        msg +
+        `${playerName} played with ${pro.name} (${pro.personaname}) ${
+          pro.team_name !== null ? 'from ' + pro.team_name : ''
+        } ${pro.with_games} times and WON ${pro.with_win} times.\n`;
+    }
+    if (againstFlag === true) {
+      msg =
+        msg +
+        `${playerName} played against ${pro.name} (${pro.personaname}) ${
+          pro.team_name !== null ? 'from ' + pro.team_name : ''
+        } ${pro.against_games} times and WON ${pro.against_win} times.\n`;
+    }
+  });
 
   return msg;
 };
