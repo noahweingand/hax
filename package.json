@@ -10,6 +10,7 @@
     "watch": "tsc --watch",
     "dev": "ts-node-dev src/index.ts",
     "build": "tsc",
+    "postinstall": "tsc",
     "dev-watch": "yarn build && yarn dev",
     "start": "yarn build && node dist/src/index.js",
     "deploy-cmds": "yarn build && node dist/src/lib/deploy-commands.js"
