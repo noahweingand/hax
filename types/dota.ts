@@ -1,32 +1,45 @@
 /* -------------Stats Types-------------- */
-export interface DotaPlayer {
+export interface DotaPlayerStratz {
   behaviorScore: number;
   firstMatchDate: number;
-  matchCount: number;
-  ranks: Rank[];
   steamAccount: SteamAccount;
-  winCount: number;
+}
+
+export interface DotaPlayerOpen {
+  solo_competitive_rank: number;
+  competitive_rank: number;
+  mmr_estimate: {
+    estimate: number;
+  };
+  rank_tier: number;
+}
+
+export interface DotaPlayerWinLoss {
+  win: number;
+  lose: number;
+}
+
+export interface ProsOpen {
+  name: string;
+  team_name: string;
+  personaname: string;
+  with_win: number;
+  with_games: number;
+  against_win: number;
+  against_games: number;
+  last_played: number; // not sure if this is the right date for matches
 }
 
 type SteamAccount = {
   lastMatchDateTime: number;
   name: string;
   partyRank: number;
-  seasonRank: number;
-  soloRank: number;
   smurfCheckDate: number;
   smurfFlag: number;
 };
 
-type Rank = {
-  asOfDateTime: string;
-  isCore: boolean;
-  rank: number;
-  seasonRankId: number;
-};
-
 /* -------------Pro Types-------------- */
-export interface Pros {
+export interface ProsStratz {
   casters: Pro[];
   internationalWinners: ProTeam[];
   teams: ProTeam[];
