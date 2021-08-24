@@ -12,7 +12,7 @@
     "build": "tsc",
     "postinstall": "npm install -g typescript && tsc",
     "dev-watch": "yarn build && yarn dev",
-    "start": "yarn build && node dist/src/index.js",
+    "start": "node dist/src/index.js",
     "deploy-cmds": "yarn build && node dist/src/lib/deploy-commands.js"
   },
   "dependencies": {
