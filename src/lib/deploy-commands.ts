@@ -43,13 +43,13 @@ export const commands = [
         .setName('name')
         .setDescription(`Name of the user you want stats for`)
         .addChoices([
-          ['Austin', 'austin'],
-          ['Ben', 'ben'],
-          ['Brent', 'brent'],
-          ['Malik', 'malik'],
-          ['Pat', 'pat'],
-          ['Tyler', 'tyler'],
-          ['Zach', 'zach'],
+          ['Austin', 'Austin'],
+          ['Ben', 'Ben'],
+          ['Brent', 'Brent'],
+          ['Malik', 'Malik'],
+          ['Pat', 'Pat'],
+          ['Tyler', 'Tyler'],
+          ['Zach', 'Zach'],
         ])
         .setRequired(false),
     ),
@@ -61,13 +61,13 @@ export const commands = [
         .setName('name')
         .setDescription(`Name of the user you want stats for`)
         .addChoices([
-          ['Austin', 'austin'],
-          ['Ben', 'ben'],
-          ['Brent', 'brent'],
-          ['Malik', 'malik'],
-          ['Pat', 'pat'],
-          ['Tyler', 'tyler'],
-          ['Zach', 'zach'],
+          ['Austin', 'Austin'],
+          ['Ben', 'Ben'],
+          ['Brent', 'Brent'],
+          ['Malik', 'Malik'],
+          ['Pat', 'Pat'],
+          ['Tyler', 'Tyler'],
+          ['Zach', 'Zach'],
         ])
         .setRequired(false),
     ),
@@ -79,16 +79,19 @@ export const commands = [
         .setName('name')
         .setDescription(`Name of the user you want stats for`)
         .addChoices([
-          ['Austin', 'austin'],
-          ['Ben', 'ben'],
-          ['Brent', 'brent'],
-          ['Malik', 'malik'],
-          ['Pat', 'pat'],
-          ['Tyler', 'tyler'],
-          ['Zach', 'zach'],
+          ['Austin', 'Austin'],
+          ['Ben', 'Ben'],
+          ['Brent', 'Brent'],
+          ['Malik', 'Malik'],
+          ['Pat', 'Pat'],
+          ['Tyler', 'Tyler'],
+          ['Zach', 'Zach'],
         ])
         .setRequired(false),
     ),
+  new SlashCommandBuilder()
+    .setName('team')
+    .setDescription(`Retrieves team averages/summaries`),
 ].map((command) => command.toJSON());
 
 const rest = new REST({ version: '9' }).setToken(DISCORD_BOT_TOKEN);
