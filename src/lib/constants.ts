@@ -2,7 +2,13 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-export const HaxPlayers = [
+type HaxPlayer = {
+  name: string;
+  steamId: number;
+  userId: string;
+};
+
+export const HaxPlayers: HaxPlayer[] = [
   {
     name: 'Austin',
     steamId: 106034326,
@@ -44,6 +50,17 @@ export const HaxPlayers = [
     userId: '230876090690699264',
   },
 ];
+
+export const ProPlayers = {
+  Blitz: {
+    steamId: 106781506,
+    name: 'Blitz',
+  },
+  PyrionFlax: {
+    name: 'PyrionFlax',
+    steamId: 9332911,
+  },
+};
 
 declare global {
   namespace NodeJS {
