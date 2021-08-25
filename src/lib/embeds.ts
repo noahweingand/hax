@@ -120,7 +120,7 @@ export const replyProStratzMsg = async (
         }.\n`;
     }
   } else {
-    msg = msg + `You have not played with any casters.\n`;
+    msg = msg + `${playerName} has not played with any casters.\n`;
   }
 
   if (teamMatches.length !== 0) {
@@ -141,7 +141,8 @@ export const replyProStratzMsg = async (
     }
   } else {
     msg =
-      msg + `You have not played with any international winners or teams.\n`;
+      msg +
+      `${playerName} has not played with any international winners or teams.\n`;
   }
 
   return msg;
