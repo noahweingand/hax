@@ -11,7 +11,7 @@
     "dev": "ts-node-dev src/index.ts",
     "build": "tsc",
     "postinstall": "npm install -g typescript && tsc",
-    "dev-watch": "yarn build && yarn dev",
+    "dev:watch": "yarn build && yarn dev",
     "start": "node dist/src/index.js",
     "deploy-cmds": "yarn build && node dist/src/lib/deploy-commands.js"
   },

@@ -1,3 +1,6 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 type HaxPlayer = {
   name: string;
   steamId: number;

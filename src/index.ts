@@ -69,16 +69,11 @@ client.on('interactionCreate', async (interaction: Interaction) => {
       const openPros = await getPros(player.steamId);
       let openDotaReply = replyProOpenMsg(player.name, openPros);
 
-      console.log(openDotaReply.length);
-
       const proEmbed = getProEmbed(openDotaReply, player.name);
 
       await interaction.channel?.send({ embeds: [proEmbed] });
       await interaction.channel?.send(stratzReply);
       await interaction.editReply('Pro Match details below!');
-    }
-  } else if (commandName === 'team') {
-    if (player !== undefined) {
     }
   }
 });
